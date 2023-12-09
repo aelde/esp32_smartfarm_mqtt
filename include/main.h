@@ -6,6 +6,9 @@
 #include <ArduinoJson.h>
 #include <Esp.h>
 #include <esp_log.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <DHT_U.h>
 
 // shared variables
 
