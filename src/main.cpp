@@ -266,10 +266,6 @@ void loop() {
 //   evt_buf["temp"] = event.temperature;
   evt_buf["mois"] = "50";
   evt_buf["ligh"] = "50";
-  // evt_buf["ch1"] = "off";
-  // evt_buf["ch2"] = "off";
-  // evt_buf["ch3"] = "off";
-  // evt_buf["ch4"] = "";
   serializeJson(evt_buf,buf);
   net_mqtt_publish(MQTT_EVT_TOPIC,buf);
     
@@ -292,13 +288,6 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length) {
 //   String key = "cmd";
   ESP_LOGI(TAG, "Message arrived on topic %s", topic);
   ESP_LOGI(TAG, "Payload: %.*s", length, payload);
-  // ESP_LOGI(TAG, "Payload: %s", payload);
-  // msg = String((char *)payload).substring(2,length);
-//   msg = String((char *)payload).substring(7,length-2);
-  // msg = String((char *)payload).substring(0,length);
-  // msg = msg.substring(msg.indexOf(key)+5,msg.indexOf(key)+11);  
-
-//   ESP_LOGI(TAG, "Payload: %s", msg.c_str());
 
     //doc test
     deserializeJson(doc, payload);
@@ -316,12 +305,9 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length) {
     if (doc["ch4"]==1)   { state=ONCH4;  Serial.println(" CH4 On"); digitalWrite(RELAY_CH_4,LOW);}
     if (doc["ch4"]==0)  { state=OFFCH4; Serial.println(" CH4 Off"); digitalWrite(RELAY_CH_4,HIGH);}
     Serial.println("-----------------------------");
-    // Serial.println("CH1: "+String(doc["ch1"]));
 
-  // ESP_LOGI(TAG, "Payload: %s", length);
-  // ESP_LOGI(TAG, "Payload: %.*s", length, );
-  // Serial.println("Message arrived on topic"+ String(topic));
-  // Serial.println("Payload: %.*s", length, payload);
+
+ 
   // extract data from payload
   char tmpbuf[128];
   memcpy(tmpbuf,payload,length);
